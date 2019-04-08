@@ -1,0 +1,2 @@
+1#T-shirt#35#0.3#Black#10Tshirt{size='XL', material='Cotton'}
+1#High heels#99#0.5#Red#12Boots{size='35', isWaterProof=true}
