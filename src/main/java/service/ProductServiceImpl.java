@@ -1,6 +1,6 @@
 package service;
 
-import iface.ProductService;
+import api.ProductService;
 import model.Product;
 
 import java.util.ArrayList;

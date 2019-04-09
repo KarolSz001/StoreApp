@@ -1,10 +1,10 @@
-package iface;
+package api;
 
 import model.Product;
 
 import java.util.List;
 
-public interface ProductDataAccess {
+public interface ProductDao {
 
     void saveProduct(Product product);
     void saveProducts(List<Product> products);

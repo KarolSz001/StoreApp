@@ -1,5 +1,4 @@
-import acces.ProductDataAccessImpl;
-import iface.ProductDataAccess;
+import dao.ProductDaoImpl;
 import model.Boots;
 import model.Product;
 import model.Tshirt;
@@ -13,6 +12,10 @@ import java.util.List;
 public class Main {
 
     public static void main(String []args) {
+        final String appName = "StoreApp01 v0.6 07.04.2019 _K.Szot";
+        System.out.println(appName);
+
+
 
         User user = new User(1, "admin", "admin");
         Tshirt tshirt = new Tshirt(1, "T-shirt", new BigDecimal(35.0), 0.3f, "Black", 10,"XL", "Cotton");
@@ -33,9 +36,9 @@ public class Main {
 
         numbers.remove(1);
         numbers.size();
-        ProductDataAccessImpl pdaoImpl = null;
+        ProductDaoImpl pdaoImpl = null;
         try {
-            pdaoImpl = new ProductDataAccessImpl("data.txt","Tshirt");
+            pdaoImpl = new ProductDaoImpl("data.txt","Tshirt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

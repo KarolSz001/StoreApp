@@ -1,22 +1,22 @@
-package acces;
+package dao;
 
-import iface.ProductDataAccess;
+import api.ProductDao;
 import model.Product;
-import parser.ProductParser;
 import utils.FileUtils;
 import java.io.FileNotFoundException;
+import model.parser.*;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProductDataAccessImpl implements ProductDataAccess {
+public class ProductDaoImpl implements ProductDao {
 
     private  final String fileName;
     private  final String productType;
 
-    public ProductDataAccessImpl(String fileName, String productType) throws FileNotFoundException {
+    public ProductDaoImpl(String fileName, String productType) throws FileNotFoundException {
         this.fileName = fileName;
         this.productType = productType;
         FileUtils.clearFile(fileName);

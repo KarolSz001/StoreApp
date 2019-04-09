@@ -1,4 +1,4 @@
-package iface;
+package api;
 
 import model.Product;
 

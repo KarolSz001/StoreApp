@@ -1,38 +1,43 @@
 package service;
 
-import iface.UserService;
+import api.UserDao;
+import api.UserService;
+import dao.UserDaoImpl;
 import model.User;
+import valid.UserValidator;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    List<User> users;
 
-    public UserServiceImpl() {
-        this.users = new ArrayList<User>();
+
+    private static UserServiceImpl instance = null;
+    private UserDao userDao = UserDaoImpl.getInstance();
+    private UserValidator userValidator = UserValidator.getInstance();
+
+    private UserServiceImpl() {
     }
 
-    public UserServiceImpl(List<User> users) {
-        this.users = users;
-    }
-
-    public List<User> getAllUsers() {
-        return users;
-    }
-
-    public void addUser(User user) {
-        users.add(user);
-    }
-
-    public void removeUserById(Integer userId) {
-        for (int i = 0; i < users.size(); i++) {
-            User userFromList = users.get(i);
-            if (userFromList.getId() == userId) {
-                users.remove(i);
-                break;
-            }
+    public static UserServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new UserServiceImpl();
         }
+        return instance;
+    }
+
+    public List<User> getAllUsers() throws IOException {
+        return userDao.getAllUsers();
+    }
+
+    public void addUser(User user) throws IOException{
+        if (userValidator.isValidate(user)) {
+            userDao.saveUser(user);
+        }
+    }
+
+    public void removeUserById(Integer userId) throws IOException {
+        userDao.removeUserById(userId);
     }
 
 }
