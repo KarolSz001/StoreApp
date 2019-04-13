@@ -13,12 +13,18 @@ import java.util.Scanner;
 
 public class ProductDaoImpl implements ProductDao {
 
-    private  final String fileName;
-    private  final String productType;
+    private static String fileName;
+    private static ProductDaoImpl instance = null;
 
-    public ProductDaoImpl(String fileName, String productType) throws FileNotFoundException {
+    public static ProductDaoImpl getInstance() throws FileNotFoundException {
+        if(instance == null){
+            instance = new ProductDaoImpl(fileName);
+        }
+        return instance;
+    }
+
+    public ProductDaoImpl(String fileName) throws FileNotFoundException {
         this.fileName = fileName;
-        this.productType = productType;
         FileUtils.clearFile(fileName);
     }
 
@@ -67,7 +73,7 @@ public class ProductDaoImpl implements ProductDao {
         List<Product> productList = new ArrayList<>();
         try (Scanner sc = new Scanner(new FileReader(fileName))) {
             while (sc.hasNextLine()) {
-                Product product = ProductParser.stringToProduct(sc.nextLine(),productType);
+                Product product = ProductParser.getProductFromString(sc.nextLine());
                 productList.add(product);
             }
         } catch (FileNotFoundException e) {
@@ -76,27 +82,4 @@ public class ProductDaoImpl implements ProductDao {
         return productList;
     }
 
-
-
-    @Override
-    public Product getProductById(Integer productId) {
-        List<Product> productList = getAllProducts();
-        for (int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getId().equals(productId)) {
-                return productList.get(i);
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public Product getProductByProductName(String productName) {
-        List<Product> productList = getAllProducts();
-        for (int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getProductName().equals(productName)) {
-                return productList.get(i);
-            }
-        }
-        return null;
-    }
 }

@@ -4,8 +4,8 @@ package model;
 import java.math.BigDecimal;
 
 public class Product {
-    public final static String SEPARATOR = "#";
-
+    public final static String SEPARATOR_PRODUCT = "#";
+    public final static String PRODUCT_ID= "P";
     private Integer id;
     private String productName;
     private BigDecimal price;
@@ -54,8 +54,13 @@ public class Product {
         return productCount;
     }
 
+    protected String getBasicInformationProduct(){
+        return id + SEPARATOR_PRODUCT + getProductName() + SEPARATOR_PRODUCT
+                + getPrice() + SEPARATOR_PRODUCT + getWeight() + SEPARATOR_PRODUCT + getColor() + SEPARATOR_PRODUCT +getProductCount();
+    }
+
     @Override
     public String toString() {
-        return id + SEPARATOR + productName + SEPARATOR + price + SEPARATOR + weight + SEPARATOR + color + SEPARATOR + productCount;
+        return PRODUCT_ID + SEPARATOR_PRODUCT + getBasicInformationProduct();
     }
 }

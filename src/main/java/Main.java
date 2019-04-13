@@ -16,7 +16,6 @@ public class Main {
         System.out.println(appName);
 
 
-
         User user = new User(1, "admin", "admin");
         Tshirt tshirt = new Tshirt(1, "T-shirt", new BigDecimal(35.0), 0.3f, "Black", 10,"XL", "Cotton");
         Boots boots = new Boots(1, "High heels", new BigDecimal(99.0), .5f, "Red", 12, 35, true);
@@ -38,7 +37,7 @@ public class Main {
         numbers.size();
         ProductDaoImpl pdaoImpl = null;
         try {
-            pdaoImpl = new ProductDaoImpl("data.txt","Tshirt");
+            pdaoImpl = new ProductDaoImpl("data.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

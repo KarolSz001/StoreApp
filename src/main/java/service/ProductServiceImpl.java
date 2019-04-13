@@ -1,8 +1,13 @@
 package service;
 
+import api.ProductDao;
 import api.ProductService;
+import dao.ProductDaoImpl;
 import model.Product;
+import valid.ProductValidator;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +15,15 @@ public class ProductServiceImpl implements ProductService {
 
     List<Product> products;
 
-    public ProductServiceImpl() {
+    ProductValidator productValidator = ProductValidator.getInstance();
+    ProductDao productDao = ProductDaoImpl.getInstance();
+
+    public ProductServiceImpl() throws FileNotFoundException {
         products = new ArrayList<Product>();
     }
 
-    public ProductServiceImpl(List<Product> products) {
-        this.products=products;
+    public ProductServiceImpl(List<Product> products) throws FileNotFoundException {
+        this.products = products;
     }
 
     public List<Product> getAllProducts() {
@@ -26,8 +34,18 @@ public class ProductServiceImpl implements ProductService {
         return products.size();
     }
 
+    @Override
+    public Product getProductByProductName(String productName) throws IOException {
+        return null;
+    }
+
+    @Override
+    public boolean isProductOnWarehouse(String productName) {
+        return false;
+    }
+
     public Product getProductByName(String productName) {
-        for(Product product : products) {
+        for (Product product : products) {
             if (product.getProductName().equals(productName)) {
                 return product;
             }
@@ -36,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public boolean isProductOnStore(String productName) {
-        for(Product product : products) {
+        for (Product product : products) {
             if (isProductExist(productName) && product.getProductCount() > 0) {
                 return true;
             }
@@ -45,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public boolean isProductExist(String productName) {
-        for(Product product : products) {
+        for (Product product : products) {
             if (product.getProductName().equals(productName)) {
                 return true;
             }
@@ -53,12 +71,27 @@ public class ProductServiceImpl implements ProductService {
         return false;
     }
 
-    public boolean isProductExist(Long productId) {
-        for(Product product : products) {
+    public boolean isProductExist(Integer productId) {
+        for (Product product : products) {
             if (product.getId().equals(productId)) {
                 return true;
             }
         }
         return false;
     }
+
+    @Override
+    public boolean saveProduct(Product product) {
+        try {
+            if (productValidator.isValidate(product)) {
+                productDao.saveProduct(product);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
 }

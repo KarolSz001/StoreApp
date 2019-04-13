@@ -1,6 +1,7 @@
 package dao;
 
 import api.UserDao;
+import exception.MyUncheckedException;
 import model.User;
 import model.parser.UserParser;
 import utils.FileUtils;
@@ -19,7 +20,6 @@ public class UserDaoImpl implements UserDao {
             FileUtils.createNewFile(fileName);
         } catch (IOException e) {
             System.out.println("Error with file path");
-            // exit zamyka całą aplikację
             System.exit(-1);
         }
     }
@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void saveUser(User user) throws IOException {
+    public void saveUser(User user) throws MyUncheckedException, IOException {
         List<User> users = getAllUsers();
         users.add(user);
         saveUsers(users);
@@ -91,34 +91,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(Integer userId) throws IOException {
-        List<User> users = getAllUsers();
-        for (User user : users
-        ) {
-            boolean isFoundUser = user.getId().equals(userId);
-            if (isFoundUser) {
-                return user;
-            }
-
-        }
-
+    public User getUserByLogin() throws IOException {
         return null;
     }
-
-    @Override
-    public User getUserByLogin(String login) throws IOException {
-        List<User> users = getAllUsers();
-
-        for (User user : users
-        ) {
-            boolean isFoundUser = user.getLogin().equals(login);
-            if (isFoundUser) {
-                return user;
-            }
-
-        }
-        return null;
-    }
-
 
 }
+
+
+

@@ -2,18 +2,17 @@ package api;
 
 import model.Product;
 
+import java.io.IOException;
 import java.util.List;
 
-public interface ProductService {
-    List<Product> getAllProducts();
 
-    Integer getCountProducts();
+    public interface ProductService {
+        List<Product> getAllProducts() throws IOException;
+        Integer getCountProducts() throws IOException;
+        Product getProductByProductName(String productName) throws IOException;
+        boolean isProductOnWarehouse(String productName);
+        boolean isProductExist(String productName);
+        boolean isProductExist(Integer productId);
+        boolean saveProduct(Product product);
+    }
 
-    Product getProductByName(String productName);
-
-    boolean isProductOnStore(String productName);
-
-    boolean isProductExist(String productName);
-
-    boolean isProductExist(Long productId);
-}

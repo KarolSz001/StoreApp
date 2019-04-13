@@ -2,15 +2,16 @@ package api;
 
 import model.Product;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public interface ProductDao {
 
-    void saveProduct(Product product);
-    void saveProducts(List<Product> products);
-    void removeProductById(Integer productId);
-    void removeProductByName(String productName);
-    List<Product>getAllProducts();
-    Product getProductById(Integer productId);
-    Product getProductByProductName(String productName);
+    void saveProduct(Product product) throws IOException;
+    void saveProducts(List<Product> products) throws FileNotFoundException;
+    void removeProductById(Integer productId) throws IOException;
+    void removeProductByName(String productName) throws IOException;
+    List<Product> getAllProducts() throws IOException;
 }
+
