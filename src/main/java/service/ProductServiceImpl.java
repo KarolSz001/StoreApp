@@ -5,26 +5,30 @@ import api.ProductService;
 import dao.ProductDaoImpl;
 import model.Product;
 import valid.ProductValidator;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
 
     List<Product> products;
+    private static ProductServiceImpl instance = null;
 
     ProductValidator productValidator = ProductValidator.getInstance();
     ProductDao productDao = ProductDaoImpl.getInstance();
 
-    public ProductServiceImpl() throws FileNotFoundException {
-        products = new ArrayList<Product>();
+   ProductServiceImpl() {
+
     }
 
-    public ProductServiceImpl(List<Product> products) throws FileNotFoundException {
-        this.products = products;
+    public static ProductServiceImpl getInstance() {
+        if(instance == null){
+            instance = new ProductServiceImpl();
+        }
+        return instance;
     }
+
+
+
 
     public List<Product> getAllProducts() {
         return products;

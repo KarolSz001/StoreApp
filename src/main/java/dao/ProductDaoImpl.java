@@ -6,6 +6,7 @@ import utils.FileUtils;
 import java.io.FileNotFoundException;
 import model.parser.*;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,20 +14,26 @@ import java.util.Scanner;
 
 public class ProductDaoImpl implements ProductDao {
 
-    private static String fileName;
+    private static String fileName = "products.data";
     private static ProductDaoImpl instance = null;
 
-    public static ProductDaoImpl getInstance() throws FileNotFoundException {
+    private ProductDaoImpl() {
+        try {
+            FileUtils.createNewFile(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ProductDaoImpl getInstance()  {
+
         if(instance == null){
-            instance = new ProductDaoImpl(fileName);
+            instance = new ProductDaoImpl();
         }
         return instance;
     }
 
-    public ProductDaoImpl(String fileName) throws FileNotFoundException {
-        this.fileName = fileName;
-        FileUtils.clearFile(fileName);
-    }
+
 
     @Override
     public void saveProduct(Product product) {

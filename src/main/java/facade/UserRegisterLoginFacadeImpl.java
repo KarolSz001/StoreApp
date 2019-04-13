@@ -10,6 +10,7 @@ import java.io.IOException;
 
 
 public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
+
     private UserService userService = UserServiceImpl.getInstance();
     private static UserRegisterLoginFacade instance = null;
 
@@ -24,13 +25,13 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
     }
 
     @Override
-    public String registerUser(User user) {
+    public boolean registerUser(User user) {
         try {
-            userService.addUser(user);
-            return " Register successfully ";
+            return userService.addUser(user);
         } catch (IOException e) {
-            throw new MyUncheckedException(" ADD USER ERROR ");
+            e.printStackTrace();
         }
+        return false;
     }
 
     @Override

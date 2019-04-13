@@ -1,49 +1,182 @@
-import dao.ProductDaoImpl;
+import api.ProductService;
+import api.UserRegisterLoginFacade;
+import facade.UserRegisterLoginFacadeImpl;
 import model.Boots;
 import model.Product;
 import model.Tshirt;
 import model.User;
+import service.ProductServiceImpl;
 
-import java.io.FileNotFoundException;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String []args) {
+    public static void main(String[] args) {
+
+        UserRegisterLoginFacade userFacade = UserRegisterLoginFacadeImpl.getInstance();
+        ProductService productService = ProductServiceImpl.getInstance();
+
+        boolean appOn = true;
+        boolean loogedOn = false;
+        int read;
+
         final String appName = "StoreApp01 v0.6 07.04.2019 _K.Szot";
         System.out.println(appName);
 
+        while (appOn) {
+            startMenu();
+            read = scanner.nextInt();
 
-        User user = new User(1, "admin", "admin");
-        Tshirt tshirt = new Tshirt(1, "T-shirt", new BigDecimal(35.0), 0.3f, "Black", 10,"XL", "Cotton");
-        Boots boots = new Boots(1, "High heels", new BigDecimal(99.0), .5f, "Red", 12, 35, true);
+            switch (read) {
+                case 1:
+                    System.out.println(" GIVE LOGIN ");
+                    String loginLog = scanner.next();
+                    System.out.println(" GIVE PASS ");
+                    String passwordLog = scanner.next();
+                    if (userFacade.loginUser(loginLog, passwordLog)) {
+                        loogedOn = true;
+                        System.out.println(" YOU ARE LOOGED");
+                    } else {
+                        System.out.println(" WRONG LOGIN ");
+                    }
+                    break;
+                case 2:
+                    System.out.println(" GIVE LOGIN: ");
+                    String loginReg = scanner.next();
+                    System.out.println(" GIVE ME PASS ");
+                    String passworReg = scanner.next();
+                    User user = new User(1, loginReg, passworReg);
 
-        List<Product> productList = new ArrayList<>();
-        productList.add(tshirt);
-        productList.add(boots);
+                    if (userFacade.registerUser(user)) {
+                        System.out.println(" YOU ARE REGISTERED ");
+                    } else {
+                        System.out.println(" SOMETHING IS WORNG ");
+                    }
+                    break;
+                case 0:
+                    appOn = false;
+                    break;
+            }
+        }
+        while (loogedOn) {
+            loggedMenu();
+            read = scanner.nextInt();
+            switch (read) {
+                case 1:
+                    productMenu();
+                    read = scanner.nextInt();
+                    Product product = null;
+                    switch (read) {
+                        case 1:
+                            product = createBootsProduct();
+                            break;
+                        case 2:
+                            product = createTshirtProduct();
+                            break;
+                        case 3:
+                            product = createOtherProduct();
+                            break;
+                    }
+                    if (productService.saveProduct(product)) {
+                        System.out.println(" PRODUCT CREATED ");
+                    } else {
+                        System.out.println(" PRODUCT WAS NOT CREATED ");
+                    }
+                    break;
 
-        System.out.println(user.toString());
-        System.out.println(tshirt.toString());
-        System.out.println(boots.toString());
-
-        List<Integer> numbers = new ArrayList<Integer>();
-        numbers.add(5);
-        numbers.add(7);
-        numbers.add(3);
-
-        numbers.remove(1);
-        numbers.size();
-        ProductDaoImpl pdaoImpl = null;
-        try {
-            pdaoImpl = new ProductDaoImpl("data.txt");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+                case 0:
+                    loogedOn = false;
+                    break;
+            }
         }
 
-        pdaoImpl.saveProducts(productList);
+    }
+
+    public static Product createOtherProduct(){
+        String productName, color;
+        Float price, weight;
+        Integer count;
+
+        System.out.println(" ProductName: ");
+        productName = scanner.next();
+
+        System.out.println(" Price: ");
+        price = scanner.nextFloat();
+
+        System.out.println(" Weight: ");
+        weight = scanner.nextFloat();
+
+        System.out.println(" Color: ");
+        color = scanner.nextLine();
+
+        System.out.println(" Count: ");
+        count = scanner.nextInt();
+
+        return new Product(1,productName,new BigDecimal(price),weight,color,count);
+    }
+    public static Product createBootsProduct() {
+        String productName, color;
+        Float price, weight;
+        Integer count, size;
+        Boolean isNaturalSkin;
+        System.out.println("ProductName: ");
+        productName = scanner.next();
+        System.out.println("Price: ");
+        price = scanner.nextFloat();
+        System.out.println("Weight: ");
+        weight = scanner.nextFloat();
+        System.out.println("Color: ");
+        color = scanner.next();
+        System.out.println("Count: ");
+        count = scanner.nextInt();
+        System.out.println("Size: ");
+        size = scanner.nextInt();
+        System.out.println("Is natural skin: ");
+        isNaturalSkin = scanner.nextBoolean();
+        return new Boots(1, productName, new BigDecimal(price), weight, color, count, size, isNaturalSkin);
+    }
+    public static Product createTshirtProduct() {
+        String productName, color, size, material;
+        Float price, weight;
+        Integer count;
+        System.out.println("ProductName: ");
+        productName = scanner.next();
+        System.out.println("Price: ");
+        price = scanner.nextFloat();
+        System.out.println("Weight: ");
+        weight = scanner.nextFloat();
+        System.out.println("Color: ");
+        color = scanner.next();
+        System.out.println("Count: ");
+        count = scanner.nextInt();
+        System.out.println("Size: ");
+        size = scanner.next();
+        System.out.println("Material: ");
+        material = scanner.next();
+        return new Tshirt(1, productName, new BigDecimal(price), weight, color, count, size, material);
+    }
 
 
+
+    public static void startMenu() {
+        System.out.println("------ MENU ------");
+        System.out.println("1 - LOGIN ");
+        System.out.println("2 - SIGIN");
+        System.out.println("0 - EXIT");
+    }
+
+    public static void loggedMenu() {
+        System.out.println("MANAGEMENT MENU");
+        System.out.println("1 - ADD NEW PRODUCT");
+        System.out.println("0 - LOGIN OUT ");
+    }
+
+    public static void productMenu() {
+        System.out.println("MANAGEMENT MENU");
+        System.out.println("1 - ADD NEW BOOTS");
+        System.out.println("0 - ADD NEW TSHIRT ");
     }
 }
