@@ -1,15 +1,19 @@
 package model;
 
 
+import enums.Color;
+import enums.ProductSeparators;
+
 import java.math.BigDecimal;
 
 public class Tshirt extends Product {
 
-    public final static String TSHIRT_ID = "T";
+    public static final char TSHIRT_TYPE = 'T';
+
     private String size;
     private String material;
 
-    public Tshirt(Integer id, String productName, BigDecimal price, Float weight, String color, Integer productCount, String size, String material) {
+    public Tshirt(Integer id, String productName, BigDecimal price, Float weight, Color color, Integer productCount, String size, String material) {
         super(id, productName, price, weight, color, productCount);
         this.size = size;
         this.material = material;
@@ -25,7 +29,7 @@ public class Tshirt extends Product {
 
     @Override
     public String toString() {
-        return TSHIRT_ID + SEPARATOR_PRODUCT + getBasicInformationProduct()
-                + SEPARATOR_PRODUCT + getSize() + SEPARATOR_PRODUCT + getMaterial();
+        return "" + ProductSeparators.TSHIRT_ID + ProductSeparators.TSHIRT_ID + getBasicInformationProduct()
+                + ProductSeparators.TSHIRT_ID + getSize() + ProductSeparators.TSHIRT_ID + getMaterial();
     }
 }

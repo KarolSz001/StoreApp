@@ -1,5 +1,6 @@
 import api.ProductService;
 import api.UserRegisterLoginFacade;
+import enums.Color;
 import facade.UserRegisterLoginFacadeImpl;
 import model.Boots;
 import model.Product;
@@ -95,8 +96,9 @@ public class Main {
 
     }
 
-    public static Product createOtherProduct(){
-        String productName, color;
+    public static Product createOtherProduct() {
+        String productName;
+                Color color;
         Float price, weight;
         Integer count;
 
@@ -109,16 +111,17 @@ public class Main {
         System.out.println(" Weight: ");
         weight = scanner.nextFloat();
 
-        System.out.println(" Color: ");
-        color = scanner.nextLine();
+        System.out.println(" Choose one of colors: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
+        color = Color.valueOf(scanner.nextLine());
 
         System.out.println(" Count: ");
         count = scanner.nextInt();
 
-        return new Product(1,productName,new BigDecimal(price),weight,color,count);
+        return new Product(1, productName, new BigDecimal(price), weight, color, count);
     }
+
     public static Product createBootsProduct() {
-        String productName, color;
+        String productName;
         Float price, weight;
         Integer count, size;
         Boolean isNaturalSkin;
@@ -128,8 +131,8 @@ public class Main {
         price = scanner.nextFloat();
         System.out.println("Weight: ");
         weight = scanner.nextFloat();
-        System.out.println("Color: ");
-        color = scanner.next();
+        System.out.println(" Choose one of colors: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
+        Color color = Color.valueOf(scanner.nextLine());
         System.out.println("Count: ");
         count = scanner.nextInt();
         System.out.println("Size: ");
@@ -138,8 +141,11 @@ public class Main {
         isNaturalSkin = scanner.nextBoolean();
         return new Boots(1, productName, new BigDecimal(price), weight, color, count, size, isNaturalSkin);
     }
+
     public static Product createTshirtProduct() {
-        String productName, color, size, material;
+        String productName;
+        Color color;
+        String size, material;
         Float price, weight;
         Integer count;
         System.out.println("ProductName: ");
@@ -148,8 +154,8 @@ public class Main {
         price = scanner.nextFloat();
         System.out.println("Weight: ");
         weight = scanner.nextFloat();
-        System.out.println("Color: ");
-        color = scanner.next();
+        System.out.println("Choose one of colors: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
+        color = Color.valueOf(scanner.nextLine());
         System.out.println("Count: ");
         count = scanner.nextInt();
         System.out.println("Size: ");
@@ -158,7 +164,6 @@ public class Main {
         material = scanner.next();
         return new Tshirt(1, productName, new BigDecimal(price), weight, color, count, size, material);
     }
-
 
 
     public static void startMenu() {

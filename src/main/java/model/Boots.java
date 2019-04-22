@@ -1,15 +1,19 @@
 package model;
 
 
+import enums.Color;
+import enums.ProductSeparators;
+
 import java.math.BigDecimal;
 
 public class Boots extends Product {
-    public final static String BOOTS_ID = "B";
+
+    public static final char BOOTS_TYPE = 'B';
     private Integer size;
     private boolean isWaterProof;
 
 
-    public Boots(Integer id, String productName, BigDecimal price, Float weight, String color, Integer productCount, Integer size, boolean isWaterProof) {
+    public Boots(Integer id, String productName, BigDecimal price, Float weight, Color color, Integer productCount, Integer size, boolean isWaterProof) {
         super(id, productName, price, weight, color, productCount);
         this.size = size;
         this.isWaterProof = isWaterProof;
@@ -17,10 +21,6 @@ public class Boots extends Product {
 
     public Integer getSize() {
         return size;
-    }
-
-    public static String getBootsId() {
-        return BOOTS_ID;
     }
 
     public void setSize(Integer size) {
@@ -37,7 +37,7 @@ public class Boots extends Product {
 
     @Override
     public String toString() {
-        return BOOTS_ID + SEPARATOR_PRODUCT + getBasicInformationProduct()
-                + SEPARATOR_PRODUCT + getSize() + SEPARATOR_PRODUCT + isWaterProof()  ;
+        return "" + ProductSeparators.BOOTS_ID + ProductSeparators.BOOTS_ID + getBasicInformationProduct()
+                + ProductSeparators.BOOTS_ID + getSize() + ProductSeparators.BOOTS_ID + isWaterProof()  ;
     }
 }

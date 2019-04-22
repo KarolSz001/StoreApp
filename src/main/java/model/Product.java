@@ -1,19 +1,23 @@
 package model;
 
 
+import enums.Color;
+import enums.ProductSeparators;
+
 import java.math.BigDecimal;
 
 public class Product {
-    public final static String SEPARATOR_PRODUCT = "#";
-    public final static String PRODUCT_ID= "P";
+
+    public static final char PRODUCT_TYPE = 'P';
+
     private Integer id;
     private String productName;
     private BigDecimal price;
     private Float weight;
-    private String color;
+    private Color color;
     private Integer productCount;
 
-    public Product(Integer id, String productName, BigDecimal price, Float weight, String color, Integer productCount) {
+    public Product(Integer id, String productName, BigDecimal price, Float weight, Color color, Integer productCount) {
         this.id = id;
         this.productName = productName;
         this.price = price;
@@ -46,7 +50,7 @@ public class Product {
         return weight;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
@@ -54,13 +58,16 @@ public class Product {
         return productCount;
     }
 
-    protected String getBasicInformationProduct(){
-        return id + SEPARATOR_PRODUCT + getProductName() + SEPARATOR_PRODUCT
-                + getPrice() + SEPARATOR_PRODUCT + getWeight() + SEPARATOR_PRODUCT + getColor() + SEPARATOR_PRODUCT +getProductCount();
+    protected String getBasicInformationProduct() {
+        return ""+ProductSeparators.PRODUCT_ID + ProductSeparators.PRODUCT_SEPARATOR + getProductName() + ProductSeparators.PRODUCT_SEPARATOR
+                + getPrice() + ProductSeparators.PRODUCT_SEPARATOR
+                + getWeight() + ProductSeparators.PRODUCT_SEPARATOR + getColor()
+                + ProductSeparators.PRODUCT_SEPARATOR + getProductCount();
     }
 
     @Override
     public String toString() {
-        return PRODUCT_ID + SEPARATOR_PRODUCT + getBasicInformationProduct();
+        return "" + ProductSeparators.PRODUCT_SEPARATOR
+                + ProductSeparators.PRODUCT_ID+ getBasicInformationProduct();
     }
 }

@@ -25,7 +25,7 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
     }
 
     @Override
-    public boolean registerUser(User user) {
+    public boolean registerUser(User user){
         try {
             return userService.addUser(user);
         } catch (IOException e) {

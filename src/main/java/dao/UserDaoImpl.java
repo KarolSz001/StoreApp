@@ -91,9 +91,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserByLogin() throws IOException {
+    public User getUserByLogin(String login) throws IOException {
         return null;
     }
+
 
 }
 
