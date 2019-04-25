@@ -14,10 +14,10 @@ public class Product {
     private String productName;
     private BigDecimal price;
     private Float weight;
-    private String color;
+    private Color color;
     private Integer productCount;
 
-    public Product(Integer id, String productName, BigDecimal price, Float weight, String color, Integer productCount) {
+    public Product(Integer id, String productName, BigDecimal price, Float weight, Color color, Integer productCount) {
         this.id = id;
         this.productName = productName;
         this.price = price;
@@ -42,7 +42,7 @@ public class Product {
         return weight;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 

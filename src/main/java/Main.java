@@ -1,11 +1,14 @@
 import api.ProductService;
 import api.UserRegisterLoginFacade;
 import enums.Color;
+import enums.Material;
 import facade.UserRegisterLoginFacadeImpl;
 import model.Boots;
 import model.Product;
 import model.Tshirt;
 import model.User;
+import model.parser.ColorParser;
+import model.parser.MaterialParser;
 import service.ProductServiceImpl;
 
 
@@ -144,8 +147,9 @@ public class Main {
 
     public static Product createTshirtProduct() {
         String productName;
-        String color;
-        String size, material;
+        Color color;
+        String size;
+        Material material;
         Float price, weight;
         Integer count;
         System.out.println("ProductName: ");
@@ -155,13 +159,13 @@ public class Main {
         System.out.println("Weight: ");
         weight = scanner.nextFloat();
         System.out.println("Choose one of colors: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
-        color = scanner.nextLine();
+        color = ColorParser.convertStringToColor(scanner.nextLine());
         System.out.println("Count: ");
         count = scanner.nextInt();
         System.out.println("Size: ");
         size = scanner.next();
         System.out.println("Material: ");
-        material = scanner.next();
+        material = MaterialParser.materialtStringToColor(scanner.next());
         return new Tshirt(1, productName, new BigDecimal(price), weight, color, count, size, material);
     }
 

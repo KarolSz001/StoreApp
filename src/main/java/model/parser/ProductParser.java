@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 
 import enums.*;
 
-import java.math.BigDecimal;
 
 public class ProductParser {
 
@@ -20,10 +19,10 @@ public class ProductParser {
                 return convertToProduct(productStr);
             }
             case Tshirt.TSHIRT_TYPE: {
-                return convertToProduct(productStr);
+                return convertToTshirt(productStr);
             }
             case Boots.BOOTS_TYPE: {
-                return convertToProduct(productStr);
+                return convertToBoots(productStr);
             }
         }
 
@@ -37,7 +36,7 @@ public class ProductParser {
         String productName = productInformations[2];
         BigDecimal price = BigDecimal.valueOf(Float.valueOf(productInformations[3]));
         Float weight = Float.parseFloat(productInformations[4]);
-        String color = productInformations[5];
+        Color color = ColorParser.convertStringToColor(productInformations[5]);
         Integer productCount = Integer.parseInt(productInformations[6]);
         Integer size = Integer.parseInt(productInformations[7]);
         Boolean isNaturalSkin = Boolean.parseBoolean(productInformations[8]);
@@ -50,7 +49,7 @@ public class ProductParser {
         String productName = productInformations[2];
         BigDecimal price = BigDecimal.valueOf(Float.valueOf(productInformations[3]));
         Float weight = Float.parseFloat(productInformations[3]);
-        String color = productInformations[4];
+        Color color = ColorParser.convertStringToColor(productInformations[4]);
         Integer productCount = Integer.parseInt(productInformations[5]);
         String size = productInformations[6];
         String material = productInformations[7];
@@ -63,7 +62,7 @@ public class ProductParser {
         String productName = productInformations[2];
         BigDecimal price = BigDecimal.valueOf(Float.valueOf(productInformations[3]));
         Float weight = Float.parseFloat(productInformations[4]);
-        String color = productInformations[5];
+        Color color = ColorParser.convertStringToColor(productInformations[5]);
         Integer productCount = Integer.parseInt(productInformations[6]);
         return new Product(id, productName, price, weight, color, productCount);
     }

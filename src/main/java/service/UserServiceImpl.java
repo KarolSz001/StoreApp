@@ -32,21 +32,65 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserById(Integer userId) throws IOException {
+        return null;
+    }
+
+    @Override
+    public User getUserByLogin(String login) throws IOException {
+        return null;
+    }
+
+    @Override
     public boolean isCorrectLoginAndPassword(String login, String password) {
-        return false;
+        User foundUser  = null;
+        try {
+            foundUser = getUserByLogin(login);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(foundUser == null){
+            return false;
+        }
+        boolean isCorrectLogin = foundUser.getLogin().equals(login);
+        boolean isCorrectPass = foundUser.getPassword().equals(password);
+
+        return isCorrectLogin && isCorrectPass;
     }
 
 
-    public boolean addUser(User user) throws IOException {
-        if (userValidator.isValidate(user)) {
-            userDao.saveUser(user);
-            return true;
-        } else return false;
+    public boolean addUser(User user) {
+        try {
+            if (isLoginAlreadyExist(user.getLogin())) {
+                throw new MyUncheckedException(" User is already exist ");
+            }
+            if (userValidator.isValidate(user)) {
+                userDao.saveUser(user);
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     @Override
     public void removeUserById(Integer userId) throws IOException {
         userDao.removeUserById(userId);
+    }
+
+    private boolean isLoginAlreadyExist(String login) {
+        User user = null;
+        try {
+            user = userDao.getUserByLogin(login);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (user == null) {
+            return false;
+        }
+        return true;
     }
 }
 

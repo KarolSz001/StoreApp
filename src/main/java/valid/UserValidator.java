@@ -34,27 +34,16 @@ public class UserValidator {
         return true;
     }
 
-    private boolean isLoginAlreadyExist(String login) {
-        User user = null;
-        try {
-            user = userDao.getUserByLogin(login);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (user == null) {
-            return false;
-        }
-        return true;
-    }
 
     private boolean isPassowrdLenghtCorrect(String pass) {
         return pass.length() < MIN_LENGHT_PASS;
     }
 
     private boolean isLoginLenghtTooCorrect(String login) {
-        return login.length() < MIN_LENGHT_PASS;
+        return login.length() < MIN_LENGHT_LOGIN;
     }
+
 
 
 }
