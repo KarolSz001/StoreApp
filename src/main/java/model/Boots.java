@@ -12,8 +12,7 @@ public class Boots extends Product {
     private Integer size;
     private boolean isWaterProof;
 
-
-    public Boots(Integer id, String productName, BigDecimal price, Float weight, Color color, Integer productCount, Integer size, boolean isWaterProof) {
+    public Boots(Integer id, String productName, BigDecimal price, Float weight, String color, Integer productCount, Integer size, boolean isWaterProof) {
         super(id, productName, price, weight, color, productCount);
         this.size = size;
         this.isWaterProof = isWaterProof;
@@ -21,14 +20,6 @@ public class Boots extends Product {
 
     public Integer getSize() {
         return size;
-    }
-
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
-    public void setWaterProof(boolean waterProof) {
-        isWaterProof = waterProof;
     }
 
     public boolean isWaterProof() {

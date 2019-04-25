@@ -98,7 +98,7 @@ public class Main {
 
     public static Product createOtherProduct() {
         String productName;
-                Color color;
+                String color;
         Float price, weight;
         Integer count;
 
@@ -112,7 +112,7 @@ public class Main {
         weight = scanner.nextFloat();
 
         System.out.println(" Choose one of colors: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
-        color = Color.valueOf(scanner.nextLine());
+        color = scanner.nextLine();
 
         System.out.println(" Count: ");
         count = scanner.nextInt();
@@ -132,7 +132,7 @@ public class Main {
         System.out.println("Weight: ");
         weight = scanner.nextFloat();
         System.out.println(" Choose one of colors: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
-        Color color = Color.valueOf(scanner.nextLine());
+        String color = scanner.nextLine();
         System.out.println("Count: ");
         count = scanner.nextInt();
         System.out.println("Size: ");
@@ -144,7 +144,7 @@ public class Main {
 
     public static Product createTshirtProduct() {
         String productName;
-        Color color;
+        String color;
         String size, material;
         Float price, weight;
         Integer count;
@@ -155,7 +155,7 @@ public class Main {
         System.out.println("Weight: ");
         weight = scanner.nextFloat();
         System.out.println("Choose one of colors: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
-        color = Color.valueOf(scanner.nextLine());
+        color = scanner.nextLine();
         System.out.println("Count: ");
         count = scanner.nextInt();
         System.out.println("Size: ");

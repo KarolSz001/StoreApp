@@ -1,5 +1,9 @@
 package enums;
 
 public enum Material {
-    LEATHER, FUR, COTTON, WOOL, POLYESTERS;
+    LEATHER,
+    FUR,
+    COTTON,
+    WOOL,
+    POLYESTERS;
 }

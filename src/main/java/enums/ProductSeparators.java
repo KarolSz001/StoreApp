@@ -2,7 +2,10 @@ package enums;
 
 
 public enum ProductSeparators {
-    PRODUCT_SEPARATOR("#"), PRODUCT_ID("P"), TSHIRT_ID("T"), BOOTS_ID("B");
+    PRODUCT_SEPARATOR("#"),
+    PRODUCT_ID("P"),
+    TSHIRT_ID("T"),
+    BOOTS_ID("B");
     
     private String word;
 
