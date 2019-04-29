@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 public class Product {
 
-    public static final char PRODUCT_TYPE = 'P';
+
 
     private Integer id;
     private String productName;

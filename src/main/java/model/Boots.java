@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 public class Boots extends Product {
 
-    public static final char BOOTS_TYPE = 'B';
+
     private Integer size;
     private boolean isWaterProof;
 

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 public class Tshirt extends Product {
 
-    public static final char TSHIRT_TYPE = 'T';
+
 
     private String size;
     private String material;

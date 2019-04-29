@@ -8,20 +8,23 @@ import java.math.BigDecimal;
 
 import enums.*;
 
+import static enums.ProductSeparators.*;
+
+
 
 public class ProductParser {
 
 
     public static Product getProductFromString(String productStr) {
-        final char productType = productStr.charAt(0);
+        final ProductSeparators productType = getIdByChar(productStr.substring(0,1));
         switch (productType) {
-            case Product.PRODUCT_TYPE: {
+            case PRODUCT_ID: {
                 return convertToProduct(productStr);
             }
-            case Tshirt.TSHIRT_TYPE: {
+            case TSHIRT_ID: {
                 return convertToTshirt(productStr);
             }
-            case Boots.BOOTS_TYPE: {
+            case BOOTS_ID: {
                 return convertToBoots(productStr);
             }
         }
@@ -31,7 +34,7 @@ public class ProductParser {
 
 
     private static Boots convertToBoots(String productStr) {
-        String[] productInformations = productStr.split(String.valueOf(ProductSeparators.PRODUCT_SEPARATOR));
+        String[] productInformations = productStr.split(String.valueOf(PRODUCT_SEPARATOR));
         Integer id = Integer.parseInt(productInformations[1]);
         String productName = productInformations[2];
         BigDecimal price = BigDecimal.valueOf(Float.valueOf(productInformations[3]));
@@ -44,7 +47,7 @@ public class ProductParser {
     }
 
     private static Tshirt convertToTshirt(String productStr) {
-        String[] productInformations = productStr.split(String.valueOf(ProductSeparators.PRODUCT_SEPARATOR));
+        String[] productInformations = productStr.split(String.valueOf(PRODUCT_SEPARATOR));
         Integer id = Integer.parseInt(productInformations[1]);
         String productName = productInformations[2];
         BigDecimal price = BigDecimal.valueOf(Float.valueOf(productInformations[3]));
@@ -57,7 +60,7 @@ public class ProductParser {
     }
 
     private static Product convertToProduct(String productStr) {
-        String[] productInformations = productStr.split(String.valueOf(ProductSeparators.PRODUCT_SEPARATOR));
+        String[] productInformations = productStr.split(String.valueOf(PRODUCT_SEPARATOR));
         Integer id = Integer.parseInt(productInformations[1]);
         String productName = productInformations[2];
         BigDecimal price = BigDecimal.valueOf(Float.valueOf(productInformations[3]));
