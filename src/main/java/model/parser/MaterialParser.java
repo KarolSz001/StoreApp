@@ -5,7 +5,7 @@ import enums.Material;
 
 public class MaterialParser {
 
-    public static Material materialtStringToColor(String text) {
+    public static Material convertStringToMaterial(String text) {
         Color result;
 
         if (text.toUpperCase().equals("RED")) {

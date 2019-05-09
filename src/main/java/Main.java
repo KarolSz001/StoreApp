@@ -101,7 +101,7 @@ public class Main {
 
     public static Product createOtherProduct() {
         String productName;
-                String color;
+                Color color;
         Float price, weight;
         Integer count;
 
@@ -115,7 +115,7 @@ public class Main {
         weight = scanner.nextFloat();
 
         System.out.println(" Choose one of colors: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
-        color = scanner.nextLine();
+        color = ColorParser.convertStringToColor(scanner.nextLine());
 
         System.out.println(" Count: ");
         count = scanner.nextInt();
@@ -135,7 +135,7 @@ public class Main {
         System.out.println("Weight: ");
         weight = scanner.nextFloat();
         System.out.println(" Choose one of colors: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
-        String color = scanner.nextLine();
+        Color color = ColorParser.convertStringToColor(scanner.nextLine());
         System.out.println("Count: ");
         count = scanner.nextInt();
         System.out.println("Size: ");
@@ -165,7 +165,7 @@ public class Main {
         System.out.println("Size: ");
         size = scanner.next();
         System.out.println("Material: ");
-        material = MaterialParser.materialtStringToColor(scanner.next());
+        material = MaterialParser.convertStringToMaterial(scanner.next());
         return new Tshirt(1, productName, new BigDecimal(price), weight, color, count, size, material);
     }
 

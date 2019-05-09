@@ -2,6 +2,7 @@ package model;
 
 
 import enums.Color;
+import enums.Material;
 import enums.ProductSeparators;
 
 import java.math.BigDecimal;
@@ -11,9 +12,9 @@ public class Tshirt extends Product {
 
 
     private String size;
-    private String material;
+    private Material material;
 
-    public Tshirt(Integer id, String productName, BigDecimal price, Float weight, Color color, Integer productCount, String size, String material) {
+    public Tshirt(Integer id, String productName, BigDecimal price, Float weight, Color color, Integer productCount, String size, Material material) {
         super(id, productName, price, weight, color, productCount);
         this.size = size;
         this.material = material;
@@ -23,7 +24,7 @@ public class Tshirt extends Product {
         return size;
     }
 
-    public String getMaterial() {
+    public Material getMaterial() {
         return material;
     }
 

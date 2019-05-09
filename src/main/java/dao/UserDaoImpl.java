@@ -15,6 +15,7 @@ public class UserDaoImpl implements UserDao {
     private static final String fileName = "users.data";
     private static UserDaoImpl instance = null;
 
+
     private UserDaoImpl() {
         try {
             FileUtils.createNewFile(fileName);
@@ -70,7 +71,6 @@ public class UserDaoImpl implements UserDao {
                 users.remove(i);
             }
         }
-
         saveUsers(users);
 
     }
@@ -86,7 +86,6 @@ public class UserDaoImpl implements UserDao {
                 users.add(user);
             }
         }
-
         return users;
     }
 

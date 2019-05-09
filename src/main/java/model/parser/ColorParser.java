@@ -5,7 +5,6 @@ import enums.Color;
 public class ColorParser {
 
     public static Color convertStringToColor(String text) {
-        Color result;
 
         if (text.toUpperCase().equals("RED")) {
             return Color.RED;

@@ -55,7 +55,7 @@ public class ProductParser {
         Color color = ColorParser.convertStringToColor(productInformations[4]);
         Integer productCount = Integer.parseInt(productInformations[5]);
         String size = productInformations[6];
-        String material = productInformations[7];
+        Material material = MaterialParser.convertStringToMaterial(productInformations[7]);
         return new Tshirt(id, productName, price, weight, color, productCount, size, material);
     }
 
