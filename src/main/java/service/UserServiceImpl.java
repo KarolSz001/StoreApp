@@ -38,18 +38,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByLogin(String login) throws IOException {
+        List<User> users = getAllUsers();
+        for (User user : users) {
+            boolean isFoundUser = user.getLogin().equals(login);
+            if (isFoundUser) {
+                return user;
+            }
+        }
         return null;
     }
 
+
     @Override
-    public boolean isCorrectLoginAndPassword(String login, String password) {
-        User foundUser  = null;
-        try {
-            foundUser = getUserByLogin(login);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(foundUser == null){
+    public boolean isCorrectLoginAndPassword(String login, String password) throws IOException {
+        User foundUser = null;
+        foundUser = getUserByLogin(login);
+
+        if (foundUser == null) {
             return false;
         }
         boolean isCorrectLogin = foundUser.getLogin().equals(login);
@@ -79,18 +84,9 @@ public class UserServiceImpl implements UserService {
         userDao.removeUserById(userId);
     }
 
-    private boolean isLoginAlreadyExist(String login) {
-        User user = null;
-        try {
-            user = userDao.getUserByLogin(login);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (user == null) {
-            return false;
-        }
-        return true;
+    private boolean isLoginAlreadyExist(String login) throws IOException {
+        User user = getUserByLogin(login);
+        return user != null;
     }
 }
 

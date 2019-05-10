@@ -2,7 +2,6 @@ package facade;
 
 import api.UserRegisterLoginFacade;
 import api.UserService;
-import exception.MyUncheckedException;
 import model.User;
 import service.UserServiceImpl;
 
@@ -36,8 +35,12 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
 
     @Override
     public boolean loginUser(String login, String password) {
-        if (userService.isCorrectLoginAndPassword(login, password)) {
-            return true;
+        try {
+            if (userService.isCorrectLoginAndPassword(login, password)) {
+                return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return false;
