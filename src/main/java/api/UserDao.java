@@ -11,9 +11,10 @@ import java.util.List;
 public interface UserDao {
 
     void saveUser(User user) throws MyUncheckedException, IOException;
-    void saveUsers(List<User> users) throws MyCheckedException, FileNotFoundException;
+
     void removeUserById(Integer userId) throws IOException;
     void removeUserByLogin(String login) throws IOException;
+
     List<User> getAllUsers() throws IOException  ;
-    User getUserByLogin(String login) throws IOException;
+    void updateUser(User user);
 }

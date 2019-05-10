@@ -8,6 +8,7 @@ public class User {
     private Integer id;
     private String login;
     private String password;
+    public User(){};
 
     public User(Integer id, String login, String password) {
         this.id = id;

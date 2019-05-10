@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
         saveUsers(users);
     }
 
-    @Override
+
     public void saveUsers(List<User> users) throws FileNotFoundException {
         PrintWriter printWriter = new PrintWriter(new FileOutputStream(fileName, true));
         for (User user : users) {
@@ -90,9 +90,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserByLogin(String login) throws IOException {
-        return null;
+    public void updateUser(User user) {
+
     }
+
 
 
 }
