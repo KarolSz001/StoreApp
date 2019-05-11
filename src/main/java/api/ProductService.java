@@ -10,9 +10,12 @@ import java.util.List;
         List<Product> getAllProducts() throws IOException;
         Integer getCountProducts() throws IOException;
         Product getProductByProductName(String productName) throws IOException;
+
         boolean isProductOnWarehouse(String productName);
         boolean isProductExist(String productName);
         boolean isProductExist(Integer productId);
-        boolean saveProduct(Product product);
+
+        boolean saveProduct(Product product) throws IOException;
+        void removeProduct(String productname) throws Exception;
     }
 

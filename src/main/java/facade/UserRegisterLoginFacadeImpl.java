@@ -4,7 +4,6 @@ import api.UserRegisterLoginFacade;
 import api.UserService;
 import model.User;
 import service.UserServiceImpl;
-
 import java.io.IOException;
 
 
@@ -24,13 +23,14 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
     }
 
     @Override
-    public boolean registerUser(User user){
+    public String registerUser(User user){
         try {
-            return userService.addUser(user);
+            userService.addUser(user);
+            return " Register done ";
         } catch (IOException e) {
-            e.printStackTrace();
+            return e.getMessage();
         }
-        return false;
+
     }
 
     @Override

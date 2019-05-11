@@ -5,6 +5,7 @@ import api.ProductService;
 import dao.ProductDaoImpl;
 import model.Product;
 import valid.ProductValidator;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -16,18 +17,16 @@ public class ProductServiceImpl implements ProductService {
     ProductValidator productValidator = ProductValidator.getInstance();
     ProductDao productDao = ProductDaoImpl.getInstance();
 
-   ProductServiceImpl() {
+    ProductServiceImpl() {
 
     }
 
     public static ProductServiceImpl getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new ProductServiceImpl();
         }
         return instance;
     }
-
-
 
 
     public List<Product> getAllProducts() {
@@ -97,5 +96,12 @@ public class ProductServiceImpl implements ProductService {
         }
         return false;
     }
+
+    @Override
+    public void removeProduct(String productName) throws Exception {
+        productDao.removeProductByName(productName);
+
+    }
+
 
 }

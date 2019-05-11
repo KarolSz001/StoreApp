@@ -1,7 +1,9 @@
+import api.ProductFacade;
 import api.ProductService;
 import api.UserRegisterLoginFacade;
 import enums.Color;
 import enums.Material;
+import facade.ProductFacadeImpl;
 import facade.UserRegisterLoginFacadeImpl;
 import model.Boots;
 import model.Product;
@@ -21,13 +23,13 @@ public class Main {
     public static void main(String[] args) {
 
         UserRegisterLoginFacade userFacade = UserRegisterLoginFacadeImpl.getInstance();
-        ProductService productService = ProductServiceImpl.getInstance();
+        ProductFacade productFacade = ProductFacadeImpl.getInstance();
 
         boolean appOn = true;
         boolean loogedOn = false;
         int read;
 
-        final String appName = "StoreApp01 v0.6 07.04.2019 _K.Szot";
+        final String appName = "StoreApp01 v0.9 10.05.2019 _K.Szot";
         System.out.println(appName);
 
         while (appOn) {
@@ -53,13 +55,7 @@ public class Main {
                     System.out.println(" GIVE ME PASS ");
                     String passworReg = scanner.next();
                     User user = new User(1, loginReg, passworReg);
-
-                    if (userFacade.registerUser(user)) {
-                        System.out.println(" YOU ARE REGISTERED ");
-                    } else {
-                        System.out.println(" SOMETHING IS WORNG ");
-                    }
-                    break;
+                    userFacade.registerUser(user);
                 case 0:
                     appOn = false;
                     break;
@@ -84,13 +80,16 @@ public class Main {
                             product = createOtherProduct();
                             break;
                     }
-                    if (productService.saveProduct(product)) {
-                        System.out.println(" PRODUCT CREATED ");
-                    } else {
-                        System.out.println(" PRODUCT WAS NOT CREATED ");
-                    }
+                    System.out.println(productFacade.createProduct(product));
+                case 2:
+                    System.out.println("Dostępne produkty: " + productFacade.getAllProducts());
+                    System.out.println("Podaj nazwę produktu do usunięcia: ");
+                    String productName = scanner.next();
+                    System.out.println(productFacade.removeProduct(productName));
                     break;
-
+                case 3:
+                    System.out.println("Dostępne produkty: " + productFacade.getAllProducts());
+                    break;
                 case 0:
                     loogedOn = false;
                     break;
