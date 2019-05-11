@@ -1,18 +1,12 @@
 package valid;
-
-import api.UserDao;
-import dao.UserDaoImpl;
 import exception.MyUncheckedException;
 import model.User;
-
-import java.io.IOException;
 
 public class UserValidator {
     private final int MIN_LENGHT_PASS = 5;
     private final int MIN_LENGHT_LOGIN = 3;
 
     private static UserValidator instance = null;
-    private static UserDao userDao = UserDaoImpl.getInstance();
 
     public UserValidator() {
     }

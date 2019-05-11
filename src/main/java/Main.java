@@ -11,7 +11,6 @@ import model.Tshirt;
 import model.User;
 import model.parser.ColorParser;
 import model.parser.MaterialParser;
-import service.ProductServiceImpl;
 
 
 import java.math.BigDecimal;
@@ -37,6 +36,7 @@ public class Main {
             read = scanner.nextInt();
 
             switch (read) {
+
                 case 1:
                     System.out.println(" GIVE LOGIN ");
                     String loginLog = scanner.next();
@@ -44,11 +44,12 @@ public class Main {
                     String passwordLog = scanner.next();
                     if (userFacade.loginUser(loginLog, passwordLog)) {
                         loogedOn = true;
-                        System.out.println(" YOU ARE LOOGED");
+                        System.out.println(" YOU ARE LOGGED");
                     } else {
                         System.out.println(" WRONG LOGIN ");
                     }
                     break;
+
                 case 2:
                     System.out.println(" GIVE LOGIN: ");
                     String loginReg = scanner.next();
@@ -56,6 +57,7 @@ public class Main {
                     String passworReg = scanner.next();
                     User user = new User(1, loginReg, passworReg);
                     userFacade.registerUser(user);
+
                 case 0:
                     appOn = false;
                     break;
@@ -80,27 +82,27 @@ public class Main {
                             product = createOtherProduct();
                             break;
                     }
+
                     System.out.println(productFacade.createProduct(product));
                 case 2:
-                    System.out.println("Dostępne produkty: " + productFacade.getAllProducts());
-                    System.out.println("Podaj nazwę produktu do usunięcia: ");
+                    System.out.println("Available products: " + productFacade.getAllProducts());
+                    System.out.println("Give name's product to remove ");
                     String productName = scanner.next();
                     System.out.println(productFacade.removeProduct(productName));
                     break;
                 case 3:
-                    System.out.println("Dostępne produkty: " + productFacade.getAllProducts());
+                    System.out.println("Available products" + productFacade.getAllProducts());
                     break;
                 case 0:
                     loogedOn = false;
                     break;
             }
         }
-
     }
 
     public static Product createOtherProduct() {
         String productName;
-                Color color;
+        Color color;
         Float price, weight;
         Integer count;
 
@@ -179,12 +181,14 @@ public class Main {
     public static void loggedMenu() {
         System.out.println("MANAGEMENT MENU");
         System.out.println("1 - ADD NEW PRODUCT");
+        System.out.println("2 - REMOVE PRODUCT");
+        System.out.println("3 - SHOW ALL PRODUCTS");
         System.out.println("0 - LOGIN OUT ");
     }
 
     public static void productMenu() {
-        System.out.println("MANAGEMENT MENU");
         System.out.println("1 - ADD NEW BOOTS");
-        System.out.println("0 - ADD NEW TSHIRT ");
+        System.out.println("2 - ADD NEW TSHIRT ");
+        System.out.println("3 - OTHERS ");
     }
 }
