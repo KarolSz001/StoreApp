@@ -6,7 +6,8 @@ public enum Color {
     RED("#FF0000"),
     GREEN("#008000"),
     BLUE("#0000FF"),
-    YELLOW("#FFFF00");
+    YELLOW("#FFFF00"),
+    DEFAULT("DEFAULT");
 
     private String hex;
 

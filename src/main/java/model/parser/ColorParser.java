@@ -23,8 +23,9 @@ public class ColorParser {
         }
         if (text.toUpperCase().equals("YELLOW")) {
             return Color.YELLOW;
-        } else {
-            return Color.BLACK;
         }
+
+        return Color.DEFAULT;
     }
+
 }
