@@ -15,7 +15,7 @@ public class ColorParserTest {
     private final String[] colorsArrNegative = {"black", "white", "red", "green", "blue", "yellow","extraColor"};
 
     @Test
-    public void testParseColors() {
+    public void testParsreColors() {
         EnumSet<Color> colorsEnumSet = EnumSet.noneOf(Color.class);
 
         for (int i = 0; i < colorsArrPositive.length; i++){
@@ -28,7 +28,7 @@ public class ColorParserTest {
     }
 
     @Test
-    public void testParesColorsNegative() {
+    public void testParserColorsNegative() {
         EnumSet<Color> colorsEnumSet = EnumSet.noneOf(Color.class);
 
         for(int i = 0; i < colorsArrNegative.length - 1; i++){
