@@ -12,7 +12,7 @@ import java.util.List;
         Product getProductByProductName(String productName) throws IOException;
 
         boolean isProductOnWarehouse(String productName);
-        boolean isProductExist(String productName);
+        boolean isProductExist(String productName) throws IOException;
         boolean isProductExist(Integer productId);
 
         boolean saveProduct(Product product) throws IOException;

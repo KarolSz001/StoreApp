@@ -3,8 +3,11 @@ package dao;
 import api.ProductDao;
 import model.Product;
 import utils.FileUtils;
+
 import java.io.FileNotFoundException;
+
 import model.parser.*;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +17,7 @@ import java.util.Scanner;
 
 public class ProductDaoImpl implements ProductDao {
 
-    private static String fileName = "products.data";
+    private static String fileName = "products.txt";
     private static ProductDaoImpl instance = null;
 
     private ProductDaoImpl() {
@@ -25,18 +28,17 @@ public class ProductDaoImpl implements ProductDao {
         }
     }
 
-    public static ProductDaoImpl getInstance()  {
+    public static ProductDaoImpl getInstance() {
 
-        if(instance == null){
+        if (instance == null) {
             instance = new ProductDaoImpl();
         }
         return instance;
     }
 
 
-
     @Override
-    public void saveProduct(Product product) {
+    public void saveProduct(Product product) throws IOException {
         List<Product> productList = getAllProducts();
         productList.add(product);
         saveProducts(productList);
@@ -54,7 +56,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void removeProductById(Integer productId) {
+    public void removeProductById(Integer productId) throws IOException {
         List<Product> productList = getAllProducts();
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i).getId().equals(productId)) {
@@ -65,7 +67,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void removeProductByName(String productName) {
+    public void removeProductByName(String productName) throws IOException {
         List<Product> productList = getAllProducts();
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i).getProductName().equals(productName)) {
@@ -76,16 +78,15 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getAllProducts() {
+    public List<Product> getAllProducts() throws IOException {
         List<Product> productList = new ArrayList<>();
-        try (Scanner sc = new Scanner(new FileReader(fileName))) {
-            while (sc.hasNextLine()) {
-                Product product = ProductParser.getProductFromString(sc.nextLine());
-                productList.add(product);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        Scanner sc = new Scanner(new FileReader(fileName));
+
+        while (sc.hasNextLine()) {
+            Product product = ProductParser.getProductFromString(sc.nextLine());
+            productList.add(product);
         }
+
         return productList;
     }
 

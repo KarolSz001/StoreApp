@@ -11,7 +11,6 @@ import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
 
-    List<Product> products;
     private static ProductServiceImpl instance = null;
 
     ProductValidator productValidator = ProductValidator.getInstance();
@@ -29,25 +28,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    public List<Product> getAllProducts() {
-        return products;
+    public List<Product> getAllProducts() throws IOException {
+        return productDao.getAllProducts();
     }
 
-    public Integer getCountProducts() {
-        return products.size();
+    public Integer getCountProducts() throws IOException {
+        return productDao.getAllProducts().size();
     }
 
     @Override
     public Product getProductByProductName(String productName) throws IOException {
-        return null;
-    }
+        List<Product> products;
+        products = productDao.getAllProducts();
 
-    @Override
-    public boolean isProductOnWarehouse(String productName) {
-        return false;
-    }
-
-    public Product getProductByName(String productName) {
         for (Product product : products) {
             if (product.getProductName().equals(productName)) {
                 return product;
@@ -56,32 +49,29 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
-    public boolean isProductOnStore(String productName) {
-        for (Product product : products) {
-            if (isProductExist(productName) && product.getProductCount() > 0) {
-                return true;
-            }
+    @Override
+    public boolean isProductOnWarehouse(String productName) {
+        try {
+            for(Product product : getAllProducts())
+            if(isProductExist(productName ) && product.getProductCount() > 0)
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return false;
     }
 
-    public boolean isProductExist(String productName) {
-        for (Product product : products) {
-            if (product.getProductName().equals(productName)) {
-                return true;
-            }
-        }
-        return false;
+
+    public boolean isProductExist(String productName) throws IOException {
+        Product product = getProductByProductName(productName);
+        return product != null;
     }
 
+    @Override
     public boolean isProductExist(Integer productId) {
-        for (Product product : products) {
-            if (product.getId().equals(productId)) {
-                return true;
-            }
-        }
         return false;
     }
+
 
     @Override
     public boolean saveProduct(Product product) {
